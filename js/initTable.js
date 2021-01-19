@@ -18,7 +18,7 @@ $(document).ready(function () {
         pageLength: 25,
         orderCellsTop: true,
         fixedHeader: true,
-         "ajax": "http://localhost:3000/reptra",
+         "ajax": "http://thegraphdatatest.eliteflower.co/reptra",
         "columns": [
             { "data": "Fecha" },
             { "data": "OT" },

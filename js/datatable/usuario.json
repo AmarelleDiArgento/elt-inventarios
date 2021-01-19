@@ -1,0 +1,24 @@
+{
+    "usuario": "Pepito Perez",
+    "perfil": "Admin",
+    "permisos": [
+        {
+            "modNombre": "Dashboard",
+            "modUrl": "general",
+            "reportes": [
+                {
+                    "repNombre": "Diario bla bla bla",
+                    "url": "general"
+                },
+                {
+                    "repNombre": "Por finca bla bla bla",
+                    "url": "repoFinca"
+                },
+                {
+                    "repNombre": "Por finca bla bla bla",
+                    "url": "repoFinca"
+                }
+            ]
+        }
+    ]
+}
