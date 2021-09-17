@@ -1,3 +1,9 @@
+
+
+
+//Resultado:
+//producto=camiseta&color=azul&talla=s
+
 $(document).ready(function () {
 
     $('#datos thead tr').clone(true).appendTo('#datos thead');
@@ -14,22 +20,57 @@ $(document).ready(function () {
             }
         });
     });
+
+    const valores = window.location.search;
+
+    //Creamos la instancia
+    const urlParams = new URLSearchParams(valores);
+
+    //Accedemos a los valores
+    var bodega = urlParams.get('bodega');
+
+    //Mostramos los valores en consola:
+    console.log(bodega);
+
     var table = $('#datos').DataTable({
         pageLength: 25,
         orderCellsTop: true,
         fixedHeader: true,
-         "ajax": "http://thegraphdatatest.eliteflower.co/reptra",
-        "columns": [
-            { "data": "Fecha" },
-            { "data": "OT" },
-            { "data": "Origen" },
-            { "data": "Destino" },
-            { "data": "Producto" },
-            { "data": "Color" },
-            { "data": "Tallos Pedidos" },
-            { "data": "Tallos Pendientes" },
-            { "data": "Tallos Enviados" }
+        "ajax": {
+            "url": "http://localhost:3000/repinv",
+            "type": "POST",
+            "data": {
+                bodega
+            }
+
+        },
+        "columns": [{
+            "data": "Ingreso"
+        },
+        {
+            "data": "Producto"
+        },
+        {
+            "data": "Variedad"
+        },
+        {
+            "data": "Color"
+        },
+        {
+            "data": "Grado"
+        },
+        {
+            "data": "Ubicacion"
+        },
+        {
+            "data": "Seriales"
+        },
+        {
+            "data": "Tallos"
+        }
         ],
+
+        "error": handleAjaxError, // this sets up jQuery to give me errors
         "language": {
             "decimal": ",",
             "thousands": ".",
@@ -54,10 +95,20 @@ $(document).ready(function () {
             "oAria": {
                 "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                 "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
+            },
+
         }
     });
     $("select").val('25');
     $('select').addClass("browser-default input-field col s12 m4 l8 center center-align");
 
+    function handleAjaxError(xhr, textStatus, error) {
+        console.log('ERROR: ', textStatus);
+        if (textStatus === 'timeout') {
+            alert('The server took too long to send the data.');
+        } else {
+            alert('An error occurred on the server. Please try again in a minute.');
+        }
+        myDataTable.fnProcessingIndicator(false);
+    }
 });
