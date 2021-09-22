@@ -28,19 +28,20 @@ $(document).ready(function () {
 
     //Accedemos a los valores
     var bodega = urlParams.get('bodega');
+    var finca = urlParams.get('finca');
 
     //Mostramos los valores en consola:
-    console.log(bodega);
+    console.log(bodega,finca);
 
     var table = $('#datos').DataTable({
         pageLength: 25,
         orderCellsTop: true,
         fixedHeader: true,
         "ajax": {
-            "url": "http://localhost:3000/repinv",
+            "url": "http://thegraphdatatest.eliteflower.co/repinv",
             "type": "POST",
             "data": {
-                bodega
+                bodega, finca
             }
 
         },
